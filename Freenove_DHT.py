@@ -23,7 +23,7 @@ class DHT(object):
 	def __init__(self,pin):
 		self.pin = pin
 		self.bits = [0,0,0,0,0]
-		GPIO.setmode(GPIO.BOARD)
+		#GPIO.setmode(GPIO.BOARD)
 	#Read DHT sensor, store the original data in bits[]	
 	def readSensor(self,pin,wakeupDelay):
 		mask = 0x80
@@ -112,7 +112,7 @@ def loop():
 	while(True):
 		sumCnt += 1
 		chk = dht.readDHT11()	
-		if (chk is 0):
+		if (chk == 0):
 			okCnt += 1		
 		okRate = 100.0*okCnt/sumCnt;
 		print("sumCnt : %d, \t okRate : %.2f%% "%(sumCnt,okRate))

@@ -3,14 +3,15 @@ import email
 import imaplib
 
 
-def send_email(subject, message):
+def send_email(subject, message, emailadd):
     smtp_server = 'smtp-mail.outlook.com'
     smtp_port = 587
     sender_email = 'iotThermalFan@outlook.com'
     sender_password = 'iotphase2'
-    receiver_email = 'georgeathanasatos13@gmail.com'
+    #receiver_email = 'georgeathanasatos13@gmail.com'
+    receiver_email = emailadd
 
-    msg = 'Subject: {}\n\n{}'.format(subject, body)
+    msg = 'Subject: {}\n\n{}'.format(subject, message)
 
     try:
         server = smtplib.SMTP(smtp_server, smtp_port)
@@ -22,7 +23,7 @@ def send_email(subject, message):
     except Exception as e:
         print(f"Email sending failed: {e}")
 
-def read_emails():
+def read_emails(emailadd):
     email_user = 'iotThermalFan@outlook.com'  
     email_pass = 'iotphase2'  
 
@@ -30,7 +31,8 @@ def read_emails():
     mail.login(email_user, email_pass)
 
     mail.select('inbox')
-
+    #dest_address = 'georgeathanasatos13@gmail.com'
+    dest_address = emailadd
     status, data = mail.search(None, 
     'UNSEEN', 
     'HEADER SUBJECT "Temperature is High"',
